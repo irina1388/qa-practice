@@ -1,0 +1,661 @@
+{
+	"info": {
+		"_postman_id": "8e35a625-2c97-4280-8cc2-4e1cdfa49319",
+		"name": "PetStore_Automation_HW",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23864410"
+	},
+	"item": [
+		{
+			"name": "AddNewPet_200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Check Pet ID\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(888555333);",
+							"});",
+							"pm.test(\"Check Pet category\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.category.id).to.eql(5);",
+							"    pm.expect(jsonData.category.name).to.eql(\"hedgehogs\");",
+							"});",
+							"pm.test(\"Check Pet name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"Bonya\");",
+							"});",
+							"pm.test(\"Check Pet photoUrls\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.photoUrls[0]).to.eql(\"https://i.pinimg.com/736x/eb/d8/3b/ebd83bb5534c915c4954b9672f3a3715.jpg\");",
+							"    pm.expect(jsonData.photoUrls[1]).to.eql(\"https://critter.science/wp-content/uploads/2020/05/hedgehog1a-1180x520.jpg\");",
+							"});",
+							"pm.test(\"Check Pet tags\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.tags[0].id).to.eql(132);",
+							"    pm.expect(jsonData.tags[0].name).to.eql(\"hedgehog\");",
+							"    pm.expect(jsonData.tags[1].id).to.eql(133);",
+							"    pm.expect(jsonData.tags[1].name).to.eql(\"happy hedgehog\");",
+							"});",
+							"pm.test(\"Check Pet status\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(\"available\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 888555333,\n  \"category\": {\n    \"id\": 5,\n    \"name\": \"hedgehogs\"\n  },\n  \"name\": \"Bonya\",\n  \"photoUrls\": [\n    \"https://i.pinimg.com/736x/eb/d8/3b/ebd83bb5534c915c4954b9672f3a3715.jpg\",\n    \"https://critter.science/wp-content/uploads/2020/05/hedgehog1a-1180x520.jpg\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 132,\n      \"name\": \"hedgehog\"\n    }, \n    {\n      \"id\": 133,\n      \"name\": \"happy hedgehog\"\n    }\n  ],\n  \"status\": \"available\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}pet",
+					"host": [
+						"{{BaseURL}}pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddNewPet_4xx",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 133133133133\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}pet",
+					"host": [
+						"{{BaseURL}}pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdatePet_200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Updated Pet ID\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(8885553331);",
+							"});",
+							"pm.test(\"Updated Pet Category\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.category.id).to.eql(5);",
+							"    pm.expect(jsonData.category.name).to.eql(\"hedgehogs\");",
+							"});",
+							"pm.test(\"Updated Pet Name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"Sonya\");",
+							"});",
+							"pm.test(\"Updated Pet PhotoUrls\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.photoUrls[0]).to.eql(\"https://i.dailymail.co.uk/1s/2024/03/27/11/82921689-13241783-Ms_Kotze_added_that_if_people_see_a_hedgehog_out_in_the_open_dur-a-2_1711537598760.jpg\");",
+							"});",
+							"pm.test(\"Updated Pet Tags\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.tags[0].id).to.eql(134);",
+							"    pm.expect(jsonData.tags[0].name).to.eql(\"hedgehog girl\");",
+							"    pm.expect(jsonData.tags[1].id).to.eql(133);",
+							"    pm.expect(jsonData.tags[1].name).to.eql(\"happy hedgehog\");",
+							"});",
+							"pm.test(\"Updated Pet Status\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(\"sold\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 8885553331,\n  \"category\": {\n    \"id\": 5,\n    \"name\": \"hedgehogs\"\n  },\n  \"name\": \"Sonya\",\n  \"photoUrls\": [\n    \"https://i.dailymail.co.uk/1s/2024/03/27/11/82921689-13241783-Ms_Kotze_added_that_if_people_see_a_hedgehog_out_in_the_open_dur-a-2_1711537598760.jpg\"\n  ],\n  \"tags\": [\n    {\n      \"id\": 134,\n      \"name\": \"hedgehog girl\"\n    }, \n    {\n      \"id\": 133,\n      \"name\": \"happy hedgehog\"\n    }\n  ],\n  \"status\": \"sold\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdatePet_4xx",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400 Invalid ID supplied\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"pm.test(\"Check code\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.code).to.eql(400);",
+							"});",
+							"pm.test(\"Check type\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.type).to.eql(\"unknown\");",
+							"});",
+							"pm.test(\"Check message\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"Invalid ID supplied\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 123123123a,\n    \"category\": {\n        \"id\": 0,\n        \"name\": \"kitten\"\n    },\n    \"name\": \"Pusheen\",\n    \"photoUrls\": [\n        \"https://static01.nyt.com/images/2021/09/14/science/07CAT-STRIPES/07CAT-STRIPES-superJumbo.jpg?quality=75&auto=webp\"\n    ],\n    \"tags\": [\n        {\n            \"id\": 1,\n            \"name\": \"kitten1\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"small cat\"\n        }\n    ],\n    \"status\": \"available\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindByStatus_200_New",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Check Pet ID\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.some(item => item.id === 888555333)).to.be.true;",
+							"});",
+							"pm.test(\"Check Pet Data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.some(item => (item.id === 888555333 || (item.category && item.category.id === 5) || ",
+							"    (item.category && item.category.name === \"hedgehogs\") || ",
+							"    (item.name === \"hedgehogs\") || ",
+							"    (item.photoUrls && item.photoUrls[0] === \"https://i.pinimg.com/736x/eb/d8/3b/ebd83bb5534c915c4954b9672f3a3715.jpg\") || ",
+							"    (item.photoUrls && item.photoUrls[1] === \"https://critter.science/wp-content/uploads/2020/05/hedgehog1a-1180x520.jpg\") || ",
+							"    (item.tags && item.tags[0] && item.tags[0].id === 132 && item.tags[0].name === \"hedgehog\") || ",
+							"    (item.tags && item.tags[1] && item.tags[1].id === 133 && item.tags[1].name === \"happy hedgehog\") ||",
+							"    (item.status === \"available\")))).to.be.true;",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/findByStatus?status=available",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"findByStatus"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "available"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindByStatus_200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Check Pet ID\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[0].id).to.eql(9223372016900013264);",
+							"});",
+							"pm.test(\"Check Pet Category\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[0].category.id).to.eql(0);",
+							"    pm.expect(jsonData[0].category.name).to.eql(\"string\");",
+							"});",
+							"pm.test(\"Check Pet Name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[0].name).to.eql(\"Mike\");",
+							"});",
+							"pm.test(\"Check Pet PhotoUrls\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[0].photoUrls[0]).to.eql(\"string\");",
+							"});",
+							"pm.test(\"Check Pet Tags\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[0].tags[0].id).to.eql(0);",
+							"    pm.expect(jsonData[0].tags[0].name).to.eql(\"string\");",
+							"});",
+							"pm.test(\"Check Pet Status\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[0].status).to.eql(\"sold\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/findByStatus?status=sold",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"findByStatus"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "sold"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindByStatus_4xx",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400 Invalid status value\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/findByStatus?status=outofstock",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"findByStatus"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "outofstock"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindByID_200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Check Pet ID\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(888555333);",
+							"});",
+							"pm.test(\"Check Pet Category\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.category.id).to.eql(5);",
+							"    pm.expect(jsonData.category.name).to.eql(\"hedgehogs\");",
+							"});",
+							"pm.test(\"Check Pet Name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"Bonya\");",
+							"});",
+							"pm.test(\"Check Pet PhotoUrls\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.photoUrls[0]).to.eql(\"https://i.pinimg.com/736x/eb/d8/3b/ebd83bb5534c915c4954b9672f3a3715.jpg\");",
+							"    pm.expect(jsonData.photoUrls[1]).to.eql(\"https://critter.science/wp-content/uploads/2020/05/hedgehog1a-1180x520.jpg\");",
+							"});",
+							"pm.test(\"Check Pet Tags\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.tags[0].id).to.eql(132);",
+							"    pm.expect(jsonData.tags[0].name).to.eql(\"hedgehog\");",
+							"    pm.expect(jsonData.tags[1].id).to.eql(133);",
+							"    pm.expect(jsonData.tags[1].name).to.eql(\"happy hedgehog\");",
+							"});",
+							"pm.test(\"Check Pet Status\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(\"available\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/888555333",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"888555333"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindByID_4xx",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404 Not Found\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"pm.test(\"Check code\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.code).to.eql(1);",
+							"});",
+							"pm.test(\"Check type\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.type).to.eql(\"error\");",
+							"});",
+							"pm.test(\"Check message\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"Pet not found\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/9090909",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"9090909"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeletePet_200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Check code\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.code).to.eql(200);",
+							"});",
+							"pm.test(\"Check type\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.type).to.eql(\"unknown\");",
+							"});",
+							"pm.test(\"Check message\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"888555333111\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/888555333111",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"888555333111"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeletePet_4xx",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404 Not Found\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/9090909",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"9090909"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseURL",
+			"value": "https://petstore.swagger.io/v2/",
+			"type": "default"
+		}
+	]
+}
